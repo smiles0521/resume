@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="css/prism.css"/>
+		<script src="js/jquery-3.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/prism.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/marked.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">	
+			ul{
+				list-style: ;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div id="content" class="style">
+				<pre v-html="highlightedCode">{{code}}</pre>
+				<pre v-html="highlightedTip">{{Tip}}</pre>
+				<pre v-html="highlightededitorStyle">{{editorStyle}}</pre>
+			</div>
+			<div id="editor" class="editor">
+				<pre>{{editor}}</pre>
+			</div>
+			<div v-html="styleCode">
+				
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var vm = new Vue({
+		
+			el: '#app',
+			components: {
+				
+			},
+			data(){
+				return {
+					code:'',
+					secCode: `
+/*大家好!
+ *简历是我们找工作的过程中必不可少的工具
+ * 今天我也来写一份简历
+ * 
+ * 
+ * 首先设置一下默认样式*/
+html *{
+	padding: 0;
+	margin: 0;
+	font-family: "楷体";
+}
+body{
+	width: 100%;
+	height: 100vh;
+	background: #333;
+	color: #fff;
+	font-size: 14px;
+}
+#app{
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	justify-content: space-around;
+}		
+/*再来加个全局过渡样式*/
+*{
+	-webkit-transition: all .3s;
+	transition: all .3s;
+}
+/*设置盒子的样式*/
+.style{
+	width: 400px;
+	height: 600px;
+	overflow-y: scroll;
+	border:1px solid #eee;
+}	
+/*再加点边距*/
+.style{
+	margin: 50px 0 0 50px;
+	padding: 20px;
+}
+/*再来加点3D效果*/
+.style{
+	-webkit-transform: rotateZ(-5deg);
+	transform: rotateZ(-5deg);
+}
+/*好
+ 
+ * 现在开始来写简历
+ * 先来写一个编辑器*/
+.editor{
+	width: 400px;
+	height: 600px;
+	overflow-y: scroll;
+	background-color: #fff;
+	margin: 50px 0 0 50px; 
+	padding: 20px;
+	color: #000;
+}
+`,
+			editor:``,
+			resumeEditor:`
+# 熊军
+---- 
+
+## 前端工程师
+#### 沉迷前端，日渐消瘦
+
+## 技能
+---- 
+
+* 1.100%还原设计稿，像素级页面制作能力
+* 2.熟悉HTTP、AJAX等技术，了解前后端分离的开发模式
+* 3.熟悉CSS 3、响应式页面等
+* 4.了解 vue.js基本原理，能使用前端框架开发富交互应用
+
+## 工作经历
+---- 
+
+* 1.重庆海荣文化传播有限公司
+* 2.大连华讯投资有限公司重庆分公司
+
+## 链接
+---- 
+
+* [GitHub](https://github.com/smiles0521)
+
+## 联系方式
+---- 
+
+* 电话:18883922117
+* 微信:smiles0521
+* Q Q :[1055311485](tencent://message/?uin=1055311485&Site=-&Menu=yes)
+* Mail:[xiongjun0521@163.com](mailto:xiongjun0521@163.com)
+`,
+					Tip:'',
+					TipCode:`
+/*差点忘了这是 Markdown 格式的了
+ * 得转换成对 HR 友好的格式
+ * 直接用开源工具转换成 HTML 就可以了*/
+`,
+					editorStyle:'',
+					lastEditorStyle:`
+/*再给HTML加点样式*/
+.editor h1{
+	padding:10px 0;
+}
+.editor h2{
+	padding:6px 0;
+}
+li{
+	list-style:none;
+	margin:5px 0 ;
+	font-size:14px;
+}
+					`
+				}
+			},
+			created(){
+				//第一段
+				var n = 0
+				var timeObj = setInterval(()=>{
+					this.code = this.secCode.substring(0,n),
+					n++,
+					$(".style").scrollTop(100000)
+					if(n>this.code.substring().length+1){
+						clearInterval(timeObj)
+						//第二段
+						var m = 0
+						var timeObj01 = setInterval(()=>{
+							this.editor = this.resumeEditor.substring(0,m),
+							m++
+							$(".editor").scrollTop(100000)
+							if(m>this.resumeEditor.substring().length){
+								clearInterval(timeObj01)
+								//第三段
+								var j=0
+								var timeObj02 = setInterval(()=>{
+
+									this.Tip =this.TipCode.substring(0,j),
+									j++
+									$(".style").scrollTop(100000)
+									if(j>this.TipCode.substring().length+1){
+										clearInterval(timeObj02)
+										document.getElementById('editor').innerHTML = marked(this.resumeEditor.substring());
+										//第四段
+										var k=0
+										var timeObj03 = setInterval(()=>{
+											this.editorStyle = this.lastEditorStyle.substring(0,k)
+											k++
+											$(".style").scrollTop(100000)
+											if(k>this.lastEditorStyle.substring().length+1){
+												clearInterval(timeObj03)
+											}
+										},20)
+									}
+								},20)
+								
+								
+								
+								
+							}
+							
+							 
+						},20)
+					}
+				},20)
+			},
+			computed: {
+				highlightedCode:function(){
+					return Prism.highlight(this.code,Prism.languages.css)
+				},
+				highlightedTip:function(){
+					return Prism.highlight(this.Tip,Prism.languages.css)
+				},
+				highlightededitorStyle:function(){
+					return Prism.highlight(this.editorStyle,Prism.languages.css)
+				},
+				styleCode(){
+					return '<style>' + this.code + this.editorStyle + '</style>'
+				}
+			}
+		
+		})
+		
+	</script>
+</html>
