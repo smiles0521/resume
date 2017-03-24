@@ -76,19 +76,19 @@ body{
 /*设置盒子的样式*/
 .style{
 	width: 40%;
-	height: 600px;
+	height: 550px;
 	overflow-y: scroll;
 	border:1px solid #eee;
 }	
 /*再加点边距*/
 .style{
-	margin: 50px 0 0 50px;
+	margin: 50px 20px 0 0;
 	padding: 20px;
 }
 /*再来加点3D效果*/
 .style{
-	-webkit-transform: rotateZ(-5deg);
-	transform: rotateZ(-5deg);
+	-webkit-transform: rotateZ(-3deg);
+	transform: rotateZ(-3deg);
 }
 /*好
  
@@ -96,10 +96,10 @@ body{
  * 先来写一个编辑器*/
 .editor{
 	width: 40%;
-	height: 600px;
+	height: 550px;
 	overflow-y: scroll;
 	background-color: #fff;
-	margin: 50px 0 0 50px; 
+	margin-top: 50px; 
 	padding: 20px;
 	color: #000;
 }
@@ -199,12 +199,13 @@ li{
 											this.editorStyle = this.lastEditorStyle.substring(0,k)
 											k++
 											$(".style").scrollTop(100000)
+											$(".editor").scrollTop(100000)
 											if(k>this.lastEditorStyle.substring().length+1){
 												clearInterval(timeObj03)
 											}
-										},20)
+										},50)
 									}
-								},20)
+								},50)
 								
 								
 								
@@ -212,9 +213,9 @@ li{
 							}
 							
 							 
-						},20)
+						},50)
 					}
-				},20)
+				},50)
 			},
 			computed: {
 				highlightedCode:function(){
@@ -231,7 +232,15 @@ li{
 				}
 			}
 		
+		});
+	</script>
+	<script type="text/javascript">
+		$(function(){
+			var winHeight = $(window).height();
+			if(winHeight<600){
+				$(".editor").height(winHeight-100);
+				$(".style").height(winHeight-100);
+			}
 		})
-		
 	</script>
 </html>
